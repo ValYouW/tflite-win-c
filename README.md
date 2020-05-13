@@ -1,5 +1,5 @@
 # tflite-win-c
-This is a demo project on using TensorFlow Lite C API on windows with Visual Studio C++.
+This is an object detection demo project using TensorFlow Lite C API on windows with Visual Studio C++.
 
 # Setup
 ## OpenCV
@@ -9,7 +9,7 @@ The project make use of OpenCV:
 1. During runtime, the app will need to load opencv dll, make sure to have opencv `build\x64\vc15\bin` dir in the path.
 
 ## tflite-dist
-The project need TensorFlow Lite headers, C lib and C dll, either [download them from here](https://github.com/ValYouW/tflite-dist/releases) or build it yourself. Eventually there should be a "dist" folder with the following:
+The project need TensorFlow Lite headers, C lib and C dll, either [download them from here](https://github.com/ValYouW/tflite-dist/releases) or build it yourself. Eventually there should be a "tflite-dist" as follow:
 ```
 +- tflite-dist
 +---+ include
