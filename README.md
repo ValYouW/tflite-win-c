@@ -22,4 +22,5 @@ The project refernce these files using a `TFLITE_DIR` environment variable:
 1. Define a global environment variable that points to your `tflite-dist` folder.
 1. During runtime, the app will need to load `tensorflowlite_c.dll`, make sure to have `tflite-dist\libs\windows_x86_64` dir in the path.
 
-
+License
+MIT
