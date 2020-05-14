@@ -1,5 +1,5 @@
 # tflite-win-c
-This is an object detection demo project using TensorFlow Lite C API on windows with Visual Studio C++.
+This is an ssd object detection and deeplab image segmentation demo project using TensorFlow Lite C API on windows with Visual Studio C++.
 
 # Setup
 ## OpenCV
