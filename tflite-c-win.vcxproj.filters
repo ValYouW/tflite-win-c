@@ -21,9 +21,15 @@
     <ClCompile Include="ObjectDetector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ImageSegmentation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ObjectDetector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageSegmentation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

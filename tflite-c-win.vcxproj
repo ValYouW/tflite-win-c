@@ -157,10 +157,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ImageSegmentation.cpp" />
     <ClCompile Include="ObjectDetector.cpp" />
     <ClCompile Include="tflite-c-win.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ImageSegmentation.h" />
     <ClInclude Include="ObjectDetector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
