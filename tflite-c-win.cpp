@@ -12,9 +12,9 @@ using namespace cv;
 
 int main()
 {
-	Mat src = imread("test.jpg");
+	Mat src = imread("od_test.jpg");
 
-	ObjectDetector detector = ObjectDetector("model-float.tflite", false);
+	ObjectDetector detector = ObjectDetector("ssd_mobilenet_v3_float.tflite", false);
 	DetectResult* res = detector.detect(src);
 	for (int i = 0; i < detector.DETECT_NUM; ++i) {
 		int label = res[i].label;
