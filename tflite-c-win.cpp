@@ -14,23 +14,7 @@ int main()
 {
 	Mat src = imread("test.jpg");
 
-
-	int length;
-	char* buffer;
-
-	ifstream is;
-	is.open("model-float.tflite", ios::binary);
-	// get length of file:
-	is.seekg(0, ios::end);
-	length = is.tellg();
-	is.seekg(0, ios::beg);
-	// allocate memory:
-	buffer = new char[length];
-	// read data as a block:
-	is.read(buffer, length);
-	is.close();
-
-	ObjectDetector detector = ObjectDetector(buffer, length, false);
+	ObjectDetector detector = ObjectDetector("model-float.tflite", false);
 	DetectResult* res = detector.detect(src);
 	for (int i = 0; i < detector.DETECT_NUM; ++i) {
 		int label = res[i].label;

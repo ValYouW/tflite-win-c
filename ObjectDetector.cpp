@@ -3,11 +3,9 @@
 
 using namespace cv;
 
-ObjectDetector::ObjectDetector(const char* tfliteModel, long modelSize, bool quantized) {
+ObjectDetector::ObjectDetector(const char* tfliteModelPath, bool quantized) {
 	m_modelQuantized = quantized;
-	if (modelSize > 0) {
-		initDetectionModel(tfliteModel, modelSize);
-	}
+	initDetectionModel(tfliteModelPath);
 }
 
 ObjectDetector::~ObjectDetector() {
@@ -19,15 +17,8 @@ ObjectDetector::~ObjectDetector() {
 	m_hasDetectionModel = false;
 }
 
-// Credit: https://github.com/YijinLiu/tf-cpu/blob/master/benchmark/obj_detect_lite.cc
-void ObjectDetector::initDetectionModel(const char* tfliteModel, long modelSize) {
-	if (modelSize < 1) { return; }
-
-	// Copy to model bytes as the caller might release this memory while we need it (EXC_BAD_ACCESS error on ios)
-	m_modelBytes = (char*)malloc(sizeof(char) * modelSize);
-	memcpy(m_modelBytes, tfliteModel, sizeof(char) * modelSize);
-	m_model = TfLiteModelCreate(m_modelBytes, modelSize);
-
+void ObjectDetector::initDetectionModel(const char* tfliteModelPath) {
+	m_model = TfLiteModelCreateFromFile(tfliteModelPath);
 	if (m_model == nullptr) {
 		printf("Failed to load model");
 		return;

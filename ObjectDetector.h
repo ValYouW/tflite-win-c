@@ -16,7 +16,7 @@ struct DetectResult {
 
 class ObjectDetector {
 public:
-	ObjectDetector(const char* tfliteModel, long modelSize, bool quantized = false);
+	ObjectDetector(const char* tfliteModelPath, bool quantized = false);
 	~ObjectDetector();
 	DetectResult* detect(Mat src);
 	const int DETECT_NUM = 3;
@@ -38,5 +38,5 @@ private:
 	const TfLiteTensor* m_num_detections = nullptr;
 
 	// Methods
-	void initDetectionModel(const char* tfliteModel, long modelSize);
+	void initDetectionModel(const char* tfliteModelPath);
 };
