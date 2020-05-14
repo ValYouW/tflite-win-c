@@ -27,8 +27,6 @@ private:
 	const float IMAGE_MEAN = 128.0;
 	const float IMAGE_STD = 128.0;
 	bool m_modelQuantized = false;
-	bool m_hasDetectionModel = false;
-	char* m_modelBytes = nullptr;
 	TfLiteModel* m_model;
 	TfLiteInterpreter* m_interpreter;
 	TfLiteTensor* m_input_tensor = nullptr;

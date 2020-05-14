@@ -9,12 +9,8 @@ ObjectDetector::ObjectDetector(const char* tfliteModelPath, bool quantized) {
 }
 
 ObjectDetector::~ObjectDetector() {
-	if (m_modelBytes != nullptr) {
-		free(m_modelBytes);
-		m_modelBytes = nullptr;
-	}
-
-	m_hasDetectionModel = false;
+	if (m_model != nullptr)
+		TfLiteModelDelete(m_model);
 }
 
 void ObjectDetector::initDetectionModel(const char* tfliteModelPath) {
@@ -77,13 +73,11 @@ void ObjectDetector::initDetectionModel(const char* tfliteModelPath) {
 	m_output_classes = TfLiteInterpreterGetOutputTensor(m_interpreter, 1);
 	m_output_scores = TfLiteInterpreterGetOutputTensor(m_interpreter, 2);
 	m_num_detections = TfLiteInterpreterGetOutputTensor(m_interpreter, 3);
-
-	m_hasDetectionModel = true;
 }
 
 DetectResult* ObjectDetector::detect(Mat src) {
 	DetectResult* res = new DetectResult[DETECT_NUM];
-	if (!m_hasDetectionModel) {
+	if (m_model == nullptr) {
 		return res;
 	}
 
