@@ -34,7 +34,6 @@ void runSegmentation() {
 	Mat src = imread("seg_test.jpg");
 
 	ImageSegmentation segmentation = ImageSegmentation("deeplabv3_mnv2_pascal.tflite");
-	// ImageSegmentation segmentation = ImageSegmentation("deeplab_xception_pascal_argmax.tflite");
 	SegmentationResult res = segmentation.segmentImage(src);
 
 	Mat mask = res.mask;
