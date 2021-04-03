@@ -5,6 +5,7 @@
 #include "opencv2/imgproc.hpp"
 #include "ObjectDetector.h"
 #include "ImageSegmentation.h"
+#include "StyleTransfer.h"
 
 using namespace std;
 using namespace cv;
@@ -54,8 +55,28 @@ void runSegmentation() {
 	waitKey(0);
 }
 
+void runStyleTransfer() {
+	Mat src = imread("seg_test.jpg");
+
+	StyleTransfer styler = StyleTransfer("style_transfer1.tflite");
+
+	cout << "Stylizing image, this takes few seconds..." << endl;
+
+	Mat res = styler.stylize(src);
+
+	if (res.empty()) {
+		cout << "Something went wrong..." << endl;
+	}
+	else 
+	{
+		imshow("res", res);
+		waitKey(0);
+	}
+}
+
 int main()
 {
-	runObjectDetection();
+	// runObjectDetection();
 	// runSegmentation();
+	runStyleTransfer();
 }
