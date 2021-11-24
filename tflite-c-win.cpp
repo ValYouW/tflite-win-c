@@ -76,7 +76,7 @@ void runStyleTransfer() {
 
 int main()
 {
-	// runObjectDetection();
+	runObjectDetection();
 	// runSegmentation();
-	runStyleTransfer();
+	// runStyleTransfer();
 }

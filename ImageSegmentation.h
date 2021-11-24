@@ -1,5 +1,6 @@
 #pragma once
 #include <opencv2/core.hpp>
+#include "tensorflow/lite/c/common.h"
 #include "tensorflow/lite/c/c_api.h"
 
 using namespace std;
