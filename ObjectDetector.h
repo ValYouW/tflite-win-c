@@ -3,6 +3,7 @@
 #include <opencv2/core.hpp>
 #include "tensorflow/lite/c/common.h"
 #include "tensorflow/lite/c/c_api.h"
+#include "tensorflow/lite/delegates/xnnpack/xnnpack_delegate.h"
 
 using namespace cv;
 
@@ -17,7 +18,7 @@ struct DetectResult {
 
 class ObjectDetector {
 public:
-	ObjectDetector(const char* tfliteModelPath, bool quantized = false);
+	ObjectDetector(const char* tfliteModelPath, bool quantized = false, bool useXnn = false);
 	~ObjectDetector();
 	DetectResult* detect(Mat src);
 	const int DETECT_NUM = 3;
@@ -30,6 +31,7 @@ private:
 	bool m_modelQuantized = false;
 	TfLiteModel* m_model;
 	TfLiteInterpreter* m_interpreter;
+	TfLiteDelegate* m_xnnpack_delegate;
 	TfLiteTensor* m_input_tensor = nullptr;
 	const TfLiteTensor* m_output_locations = nullptr;
 	const TfLiteTensor* m_output_classes = nullptr;
@@ -37,5 +39,5 @@ private:
 	const TfLiteTensor* m_num_detections = nullptr;
 
 	// Methods
-	void initDetectionModel(const char* tfliteModelPath);
+	void initDetectionModel(const char* tfliteModelPath, bool useXnn);
 };

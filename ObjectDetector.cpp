@@ -3,9 +3,9 @@
 
 using namespace cv;
 
-ObjectDetector::ObjectDetector(const char* tfliteModelPath, bool quantized) {
+ObjectDetector::ObjectDetector(const char* tfliteModelPath, bool quantized, bool useXnn) {
 	m_modelQuantized = quantized;
-	initDetectionModel(tfliteModelPath);
+	initDetectionModel(tfliteModelPath, useXnn);
 }
 
 ObjectDetector::~ObjectDetector() {
@@ -13,7 +13,7 @@ ObjectDetector::~ObjectDetector() {
 		TfLiteModelDelete(m_model);
 }
 
-void ObjectDetector::initDetectionModel(const char* tfliteModelPath) {
+void ObjectDetector::initDetectionModel(const char* tfliteModelPath, bool useXnn) {
 	m_model = TfLiteModelCreateFromFile(tfliteModelPath);
 	if (m_model == nullptr) {
 		printf("Failed to load model");
@@ -23,6 +23,12 @@ void ObjectDetector::initDetectionModel(const char* tfliteModelPath) {
 	// Build the interpreter
 	TfLiteInterpreterOptions* options = TfLiteInterpreterOptionsCreate();
 	TfLiteInterpreterOptionsSetNumThreads(options, 1);
+
+	if (useXnn) {
+		TfLiteXNNPackDelegateOptions xnnOpts = TfLiteXNNPackDelegateOptionsDefault();
+		m_xnnpack_delegate = TfLiteXNNPackDelegateCreate(&xnnOpts);
+		TfLiteInterpreterOptionsAddDelegate(options, m_xnnpack_delegate);
+	}
 
 	// Create the interpreter.
 	m_interpreter = TfLiteInterpreterCreate(m_model, options);
